@@ -6,7 +6,7 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/sphinx-multiversion-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/sphinx-multiversion-{{ version }}.tar.gz
   sha256: 5cd1ca9ecb5eed63cb8d6ce5e9c438ca13af4fa98e7eb6f376be541dd4990bcb
 
 build:
@@ -14,14 +14,14 @@ build:
     - sphinx-multiversion=sphinx_multiversion:main
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv
-  number: 0
+  number: 1
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - sphinx >=2.1
 
 test:
@@ -32,6 +32,7 @@ test:
     - sphinx-multiversion --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://holzhaus.github.io/sphinx-multiversion/
